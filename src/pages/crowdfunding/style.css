@@ -1,0 +1,15 @@
+.other-input::placeholder{
+    padding-left: 5px;
+    color: white;
+}
+.other-input::-ms-input-placeholder{
+    color: white;
+}
+
+.other-input{
+    width: 5rem;
+    outline: none;
+    color: white;
+    padding-left: 5px;
+
+}

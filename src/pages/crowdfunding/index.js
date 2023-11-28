@@ -3,10 +3,22 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { meta } from "../../content_option";
 import donationImg from "../../assets/images/donate.jpeg";
-import { PaytmButton } from "../../paytm-button/paytmButton";
+import "./style.css";
 
 export const CrowdFunding = () => {
   const [donationAmt, setDonationAmt] = useState(0);
+
+  const handleSelectAmt = (amt) => {
+    setDonationAmt(Number(amt));
+  };
+
+  const handleChange = (event) => {
+    const num = Number(event.target.value);
+    if (typeof num === "number") {
+      setDonationAmt(num);
+    }
+  };
+
   return (
     <HelmetProvider>
       <Container>
@@ -36,27 +48,40 @@ export const CrowdFunding = () => {
                 our future.
               </p>
               <div className="d-flex gap-3 flex-wrap justify-content-center">
-                {[5, 10, 40, 50, 100, 200].map((item) => (
-                  <button
-                    onClick={() => {
-                      setDonationAmt(Number(item));
-                    }}
-                    className="btn ac_btn"
-                    key={item}
-                    style={{ minWidth: "5rem" }}
-                  >
-                    {item !== "Other" && "₹"}
-                    {item}
-                  </button>
-                ))}
+                {[51, 101, 201, 501, 1001, "Other"].map((item) =>
+                  item === "Other" ? (
+                    <input
+                      className="bg-transparent border border-2 other-input"
+                      id="name"
+                      name="name"
+                      placeholder="Other"
+                      // value={formData.name || ""}
+                      type="number"
+                      onChange={handleChange}
+                    />
+                  ) : (
+                    <button
+                      onClick={() => handleSelectAmt(item)}
+                      className="btn ac_btn"
+                      key={item}
+                      style={{ minWidth: "5rem" }}
+                    >
+                      {item !== "Other" && "₹"}
+                      {item}
+                    </button>
+                  )
+                )}
               </div>
-              {/* <PaytmButton /> */}
               <button
                 id="button_p"
-                style={{ minWidth: "10rem" }}
+                style={{
+                  minWidth: "10rem",
+                  maxWidth: "11rem",
+                  overflow: "clip",
+                  whiteSpace: "nowrap",
+                }}
                 className="btn ac_btn mt-5 mx-auto w-auto d-block"
                 type="submit"
-                // onClick={makePayment}
               >
                 DONATE {donationAmt ? " ₹" + donationAmt : ""}
               </button>
