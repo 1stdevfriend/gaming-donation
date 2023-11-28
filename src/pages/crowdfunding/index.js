@@ -29,7 +29,7 @@ export const CrowdFunding = () => {
         </Helmet>
         <Row className="mb-lg-5 mt-3 pt-md-3">
           <Col lg="8">
-            <h1 className="display-4 mb-4">Crowd Funding</h1>
+            <h1 className="display-4 mb-4"> Funding</h1>
             <hr className="t_border my-4 ml-0 text-left" />
           </Col>
         </Row>
@@ -51,7 +51,7 @@ export const CrowdFunding = () => {
                 {[51, 101, 201, 501, 1001, "Other"].map((item) =>
                   item === "Other" ? (
                     <input
-                      className="bg-transparent border border-2 other-input"
+                      className="bg-transparent other-input"
                       id="name"
                       name="name"
                       placeholder="Other"
