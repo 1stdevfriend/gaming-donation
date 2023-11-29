@@ -1,12 +1,20 @@
-import React, { useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Col, Container, ProgressBar, Row } from "react-bootstrap";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { meta } from "../../content_option";
 import donationImg from "../../assets/images/donate.jpeg";
 import "./style.css";
+import axios from "axios";
 
 export const CrowdFunding = () => {
   const [donationAmt, setDonationAmt] = useState(0);
+  const [progressBarStats, setProgressBarStats] = useState(0);
+  const [fetchingStatus, setFetchingStatus] = useState({
+    loadingDonation: false,
+    loadingProgressBar: true,
+  });
+
+  console.log("progressBarStats", fetchingStatus);
 
   const handleSelectAmt = (amt) => {
     setDonationAmt(Number(amt));
@@ -18,6 +26,41 @@ export const CrowdFunding = () => {
       setDonationAmt(num);
     }
   };
+
+  const handleDonate = async () => {
+    try {
+      if (!donationAmt) return;
+      setFetchingStatus((pre) => ({ ...pre, loadingDonation: true }));
+      const res = await axios.post("http://localhost:3006/paynow", {
+        name: "test user2",
+        amt: donationAmt,
+        date: new Date().toLocaleString(),
+      });
+      console.log("response", res.data);
+      window.open(res.data.data, "_self");
+      setFetchingStatus((pre) => ({ ...pre, loadingDonation: false }));
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    const getFundDetails = async () => {
+      try {
+        setFetchingStatus((pre) => ({ ...pre, loadingProgressBar: true }));
+        const res = await axios.get("http://localhost:3006/get-fund");
+        console.log("res--->", res?.data);
+        const totalAmt = Number(res?.data?.data);
+
+        if (!isNaN(totalAmt) && totalAmt)
+          setProgressBarStats((totalAmt * 100) / 10000);
+        setFetchingStatus((pre) => ({ ...pre, loadingProgressBar: false }));
+      } catch (error) {
+        console.log("error", error?.message);
+      }
+    };
+    getFundDetails();
+  }, []);
+
+  const getProgressBarStats = () => {};
 
   return (
     <HelmetProvider>
@@ -51,6 +94,7 @@ export const CrowdFunding = () => {
                 {[51, 101, 201, 501, 1001, "Other"].map((item) =>
                   item === "Other" ? (
                     <input
+                      key={item}
                       className="bg-transparent other-input"
                       id="name"
                       name="name"
@@ -66,13 +110,13 @@ export const CrowdFunding = () => {
                       key={item}
                       style={{ minWidth: "5rem" }}
                     >
-                      {item !== "Other" && "₹"}
-                      {item}
+                      {" ₹" + item}
                     </button>
                   )
                 )}
               </div>
               <button
+                disabled={fetchingStatus.loadingDonation}
                 id="button_p"
                 style={{
                   minWidth: "10rem",
@@ -82,9 +126,46 @@ export const CrowdFunding = () => {
                 }}
                 className="btn ac_btn mt-5 mx-auto w-auto d-block"
                 type="submit"
+                onClick={handleDonate}
               >
-                DONATE {donationAmt ? " ₹" + donationAmt : ""}
+                {fetchingStatus.loadingDonation ? (
+                  <span>Loading...</span>
+                ) : (
+                  <span>DONATE {donationAmt ? " ₹" + donationAmt : ""}</span>
+                )}
               </button>
+              <div className="progress-bar-container">
+                <h6>Fund Progress</h6>
+                {fetchingStatus.loadingProgressBar ? (
+                  <div>Loading...</div>
+                ) : (
+                  <ProgressBar>
+                    <ProgressBar
+                      style={{
+                        height: "16px",
+                        borderTopLeftRadius: "4px",
+                        borderBottomLeftRadius: "4px",
+                      }}
+                      label={progressBarStats + "%"}
+                      variant="success"
+                      now={Number(progressBarStats.toFixed(2))}
+                      key={1}
+                      animated
+                    />
+                    <ProgressBar
+                      label={(100 - progressBarStats).toFixed(2) + "%"}
+                      variant="danger"
+                      now={Number((100 - progressBarStats).toFixed(2))}
+                      key={2}
+                      style={{
+                        height: "16px",
+                        borderTopRightRadius: "4px",
+                        borderBottomRightRadius: "4px",
+                      }}
+                    />
+                  </ProgressBar>
+                )}
+              </div>
             </div>
           </Col>
         </Row>

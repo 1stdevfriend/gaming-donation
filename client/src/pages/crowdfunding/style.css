@@ -14,3 +14,8 @@
     border: 2px solid var(--secondary-color);
 
 }
+
+.progress-bar-container{
+    width: 90%;
+    margin: 3rem auto 0 auto;
+}

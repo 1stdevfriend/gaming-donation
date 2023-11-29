@@ -1,11 +1,9 @@
 require("dotenv").config();
 
-const { REDIS_HOST, REDIS_PORT, MONGO_URI } = process.env;
+const { STRIPE_SK, MONGO_URI, ENDPOINT_SECRET } = process.env;
 
 module.exports = {
-  databaseConfig: {
-    redisHost: REDIS_HOST,
-    redisPort: REDIS_PORT,
-    mongoURI: MONGO_URI,
-  },
+  mongoURI: MONGO_URI,
+  STRIPE_SK,
+  ENDPOINT_SECRET,
 };

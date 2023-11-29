@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const config = require("../../config");
 
 function createConnectionPool() {
-  const mongoURI = config.databaseConfig.mongoURI;
+  const mongoURI = config.mongoURI;
   if (!mongoURI) return;
   try {
     console.log("Connected To Database");
