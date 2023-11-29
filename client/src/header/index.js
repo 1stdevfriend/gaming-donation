@@ -45,7 +45,7 @@ const Headermain = () => {
                       className="my-3"
                     >
                       {" "}
-                      Portfolio
+                      Upcoming games
                     </Link>
                   </li>
                   <li className="menu_item">
@@ -62,7 +62,7 @@ const Headermain = () => {
                   <li className="menu_item">
                     <Link onClick={handleToggle} to="/donate" className="my-3">
                       {" "}
-                      Crowd Funding
+                      Donate
                     </Link>
                   </li>
                 </ul>
