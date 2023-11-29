@@ -18,7 +18,7 @@
     font-family: 'Raleway';
 }
 
-.progress {
+.custom-progress {
     height: 5px;
     background: var(--secondary);
     border-radius: 0;
@@ -27,7 +27,7 @@
     overflow: visible;
 }
 
-.progress .progress-bar {
+.custom-progress .progress-bar {
     position: relative;
     background: var(--text-color);
     animation: animate-positive 2s;
@@ -35,7 +35,7 @@
     opacity: 0.9;
 }
 
-.progress .progress-value {
+.custom-progress .progress-value {
     position: absolute;
     top: -30px;
     right: 8px;

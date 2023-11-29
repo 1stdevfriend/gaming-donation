@@ -7,8 +7,8 @@ const router = express.Router();
 
 router.post("/paynow", [express.json()], async (req, res) => {
   try {
-    const { amt, name, date } = req.body;
-    if (amt && name && date) {
+    const { amt } = req.body;
+    if (amt) {
       const session = await stripe.checkout.sessions.create({
         line_items: [
           {
@@ -24,6 +24,7 @@ router.post("/paynow", [express.json()], async (req, res) => {
           },
         ],
         mode: "payment",
+        // TODO => Need to update url in production
         success_url: `http://localhost:3000/stripe-redirect/success`,
         cancel_url: `http://localhost:3000/stripe-redirect/cancel`,
       });
