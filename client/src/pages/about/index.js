@@ -66,7 +66,7 @@ export const About = () => {
               return (
                 <div key={i}>
                   <h3 className="progress-title">{data.name}</h3>
-                  <div className="progress">
+                  <div className="progress custom-progress">
                     <div
                       className="progress-bar"
                       style={{

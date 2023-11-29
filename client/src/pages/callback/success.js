@@ -9,7 +9,7 @@ export const Success = () => {
   const navigator = useNavigate();
   useEffect(() => {
     setTimeout(() => navigator("/donate"), 2500);
-  }, []);
+  }, [navigator]);
   return (
     <Container className="stripe-main d-flex justify-content-center align-items-center">
       <div className="">

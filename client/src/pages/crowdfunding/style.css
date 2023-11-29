@@ -19,3 +19,22 @@
     width: 90%;
     margin: 3rem auto 0 auto;
 }
+
+.progress-bar-info{
+    display: flex;
+    justify-content: space-between;
+}
+.progress-bar-info > div {
+    margin-top: 1rem;
+width: 33%;
+
+}
+.progress-bar-info>div:nth-child(1){
+    text-align: start;
+}
+.progress-bar-info>div:nth-child(2){
+    text-align: center;
+}
+.progress-bar-info>div:nth-child(3){
+    text-align: end;
+}
