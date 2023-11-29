@@ -1,13 +1,14 @@
 const express = require("express");
-const stripe = require("stripe")(process.env.STRIPE_SK);
+// const { checkoutUser } = require("../database/schemas/checkout.user");
+const { STRIPE_SK } = require("../config");
+const stripe = require("stripe")(STRIPE_SK);
 
 const router = express.Router();
 
-router.post("/paynow", async (req, res) => {
-  const response = { msg: "", code: 400 };
+router.post("/paynow", [express.json()], async (req, res) => {
   try {
-    const { amount, name, date } = req.body;
-    if (amount && name && date) {
+    const { amt, name, date } = req.body;
+    if (amt && name && date) {
       const session = await stripe.checkout.sessions.create({
         line_items: [
           {
@@ -17,23 +18,23 @@ router.post("/paynow", async (req, res) => {
                 name: "Gaming fund",
                 description: "Contribute for gaming community",
               },
-              unit_amount: Math.round(Number(amount)) * 100,
+              unit_amount: Math.round(Number(amt)) * 100,
             },
             quantity: 1,
           },
         ],
         mode: "payment",
-        success_url: `${serverHost}/stripe-redirect/success?pid=${projectIdentifier}`,
-        cancel_url: `${serverHost}/stripe-redirect/cancel`,
+        success_url: `http://localhost:3000/stripe-redirect/success`,
+        cancel_url: `http://localhost:3000/stripe-redirect/cancel`,
       });
       res.status(200).json({ msg: "Checkout URL", data: session.url });
     } else res.status(404).json({ msg: "Some keys are missing", data: null });
   } catch (err) {
     console.log(err?.message);
-    response["code"] = 500;
-    response["msg"] = "Internal server error";
+    res
+      .status(500)
+      .json({ msg: "Internal server error:" + err?.message, data: null });
   }
-  res.status(response["code"]).json(response);
 });
 
 module.exports = router;

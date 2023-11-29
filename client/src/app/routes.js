@@ -8,6 +8,8 @@ import { About } from "../pages/about";
 import { Socialicons } from "../components/socialicons";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { CrowdFunding } from "../pages/crowdfunding";
+import { Success } from "../pages/callback/success";
+import { Cancel } from "../pages/callback/cancel";
 
 const AnimatedRoutes = withRouter(({ location }) => (
   <TransitionGroup>
@@ -26,6 +28,8 @@ const AnimatedRoutes = withRouter(({ location }) => (
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/donate" element={<CrowdFunding />} />
+        <Route path="/stripe-redirect/success" element={<Success />} />
+        <Route path="/stripe-redirect/cancel" element={<Cancel />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </CSSTransition>
