@@ -18,7 +18,8 @@ router.get("/get-fund", [express.json()], async (req, res) => {
         },
       },
     ]);
-    res.status(200).json({ data: totalAmt[0].total });
+    const documents = await checkoutUser.find({}).toArray();
+    res.status(200).json({ totalAmt: totalAmt[0]?.total, documents });
   } catch (error) {
     console.log(error?.message);
     res
