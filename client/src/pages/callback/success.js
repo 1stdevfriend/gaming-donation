@@ -13,7 +13,7 @@ export const Success = () => {
   return (
     <Container className="stripe-main d-flex justify-content-center align-items-center">
       <div className="">
-        <img src={img} />
+        <img src={img} alt="payment-failed" />
       </div>
     </Container>
   );

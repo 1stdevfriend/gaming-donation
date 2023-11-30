@@ -15,10 +15,6 @@
 
 }
 
-.progress-bar-container{
-    width: 90%;
-    margin: 3rem auto 0 auto;
-}
 
 .progress-bar-info{
     display: flex;
@@ -37,4 +33,27 @@ width: 33%;
 }
 .progress-bar-info>div:nth-child(3){
     text-align: end;
+}
+thead{
+    background-color:  var(--secondary-color);
+    border: none;
+}
+.table-head-row{
+    background-color:  var(--secondary-color);
+    color: var(--primary-color);
+    text-align: center;
+    border-left: 1px solid var(--secondary-color);
+    border-right: 2px solid var(--secondary-color);
+}
+.table-head-row>td{
+    border-right: 1px solid var(--primary-color);
+}
+
+.table-body-row{
+    color: var(--secondary-color);  
+    text-align: center;
+    /* border: 1px solid var(--secondary-color); */
+}
+.table-body-row>td{
+    border: 1px solid var(--secondary-color);
 }

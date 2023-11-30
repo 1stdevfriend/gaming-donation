@@ -12,6 +12,7 @@ export const CrowdFunding = () => {
   const [donationAmt, setDonationAmt] = useState(0);
   const [progressBarStats, setProgressBarStats] = useState(0);
   const [donatedYet, setDonatedYet] = useState(0);
+  const [fundDetails, setFundDetails] = useState(null);
   const [fetchingStatus, setFetchingStatus] = useState({
     loadingDonation: false,
     loadingProgressBar: true,
@@ -39,6 +40,13 @@ export const CrowdFunding = () => {
       setFetchingStatus((pre) => ({ ...pre, loadingDonation: false }));
     } catch (error) {
       console.log(error);
+      window.alert(
+        'Unable to proceed your transaction,"' +
+          error?.message +
+          '" Try again later.'
+      );
+      setFetchingStatus((pre) => ({ ...pre, loadingDonation: false }));
+      setDonationAmt(0);
     }
   };
 
@@ -47,15 +55,21 @@ export const CrowdFunding = () => {
       try {
         setFetchingStatus((pre) => ({ ...pre, loadingProgressBar: true }));
         const res = await axios.get("http://localhost:3006/get-fund");
-        const totalAmt = Number(res?.data?.data);
+        const totalAmt = Number(res?.data?.totalAmt);
 
         if (!isNaN(totalAmt) && totalAmt) {
           setProgressBarStats((totalAmt * 100) / 10000);
           setDonatedYet(totalAmt);
         }
+        if (res?.data?.documents?.length) setFundDetails(res?.data?.documents);
+        else setFundDetails(null);
+
         setFetchingStatus((pre) => ({ ...pre, loadingProgressBar: false }));
       } catch (error) {
         console.log("error", error?.message);
+        window.alert("Unable to fetch fund progress details," + error?.message);
+        setFetchingStatus(0);
+        setFundDetails(null);
       }
     };
     getFundDetails();
@@ -109,7 +123,7 @@ export const CrowdFunding = () => {
                       key={item}
                       style={{ minWidth: "5rem" }}
                     >
-                      {" ₹" + item}
+                      {"₹ " + item}
                     </button>
                   )
                 )}
@@ -136,10 +150,10 @@ export const CrowdFunding = () => {
             </div>
           </Col>
         </Row>
-        <div className="progress-bar-container">
-          <h6 className="fs-3 mb-3">Fund Progress</h6>
+        <Row className="progress-bar-container col-lg-11 mx-auto">
+          <h6 className="fs-3 mb-3 p-0">Fund Progress</h6>
           {fetchingStatus.loadingProgressBar ? (
-            <div>Loading...</div>
+            <div className="p-0">Loading...</div>
           ) : progressBarStats ? (
             <>
               <ProgressBar>
@@ -185,9 +199,36 @@ export const CrowdFunding = () => {
               </div>
             </>
           ) : (
-            <div className="fs-6">No data available.</div>
+            <div className="fs-6 p-0">No data available.</div>
           )}
-        </div>
+        </Row>
+
+        <Row className="mt-5 col-lg-11 mx-auto ">
+          {/* col-md-11 mx-auto col-lg-8 col-xl-6  */}
+          <h6 className="fs-3 mb-3 p-0">Fund Details</h6>
+          {fetchingStatus.loadingProgressBar ? (
+            "Loading..."
+          ) : fundDetails?.length ? (
+            <table>
+              <thead>
+                <tr className="fw-bold fs-6 table-head-row">
+                  <td>DONAR NAME</td>
+                  <td>DONATED AMOUNT</td>
+                </tr>
+              </thead>
+              <tbody>
+                {fundDetails.map((item, i) => (
+                  <tr key={item.amt + item.name + i} className="table-body-row">
+                    <td>{item.name}</td>
+                    <td>{"₹ " + item.amt}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            "No data available."
+          )}
+        </Row>
       </Container>
       ;
     </HelmetProvider>
