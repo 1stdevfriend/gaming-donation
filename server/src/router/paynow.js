@@ -15,8 +15,11 @@ router.post("/paynow", [express.json()], async (req, res) => {
             price_data: {
               currency: "inr",
               product_data: {
-                name: "Gaming fund",
-                description: "Contribute for gaming community",
+                name: "Donation",
+                description: "Donate for Elegato HD 60 S",
+                Image: [
+                  "https://i.pcmag.com/imagery/reviews/04dRlD6i7f8OrAtbWbNfZoB-3.fit_scale.size_1028x578.v1569482971.jpg",
+                ],
               },
               unit_amount: Math.round(Number(amt)) * 100,
             },

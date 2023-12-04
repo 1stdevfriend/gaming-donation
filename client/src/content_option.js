@@ -18,9 +18,9 @@ const introdata = {
 };
 
 const dataabout = {
-  title: "abit about my self",
+  title: "About",
   aboutme:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis dolor id ligula semper elementum feugiat pretium nulla. Nunc non commodo dolor. Nunc mollis dignissim facilisis. Morbi ut magna ultricies.",
+    " I'm Kartikey Kushwah, rocking the CEO hat during the day, and at night, you'll find me owning the gaming realm. Balancing bytes and battles, life's a thrilling ride! 🌐🎮",
 };
 const worktimeline = [
   {

@@ -68,13 +68,13 @@ const Headermain = () => {
           </div>
           <div className="menu_footer d-flex flex-column flex-md-row justify-content-between align-items-md-center position-absolute w-100 p-3">
             <div className="d-flex">
-              <a href={socialprofils.facebook} target="_blank">
+              <a href={socialprofils.facebook} target="_blank" rel="noreferrer">
                 Facebook
               </a>
-              <a href={socialprofils.github} target="_blank">
+              <a href={socialprofils.github} target="_blank" rel="noreferrer">
                 Github
               </a>
-              <a href={socialprofils.twitter} target="_blank">
+              <a href={socialprofils.twitter} target="_blank" rel="noreferrer">
                 Twitter
               </a>
             </div>
