@@ -1,18 +1,27 @@
-.other-input::placeholder{
-    padding-left: 5px;
-    color: var(--secondary-color);
-}
-.other-input::-ms-input-placeholder{
-    color: var(--secondary-color);
-}
-
-.other-input{
-    width: 5rem;
-    outline: none;
+.other-input {
+    width: 6rem;
     color: var(--text-color);
     padding-left: 5px;
     border: 2px solid var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.other-input>input::placeholder{
+    padding-left: 5px;
+    color: var(--secondary-color);
+}
+.other-input>input::-ms-input-placeholder{
+    color: var(--secondary-color);
+}
 
+
+.other-input>input{
+    width: 90%;
+    outline: none;
+    border: none;
+    color: var(--text-color);
+    padding-bottom: 5px;
 }
 
 
@@ -39,21 +48,27 @@ thead{
     border: none;
 }
 .table-head-row{
-    background-color:  var(--secondary-color);
-    color: var(--primary-color);
+    background-color:  rgb(109, 109, 109);
+    color: var(--secondary-color);
     text-align: center;
-    border-left: 1px solid var(--secondary-color);
-    border-right: 2px solid var(--secondary-color);
+    padding: 10px 0;
+    /* border-left: 1px solid var(--secondary-color);
+    border-right: 2px solid var(--secondary-color); */
 }
 .table-head-row>td{
-    border-right: 1px solid var(--primary-color);
+    /* border-right: 1px solid var(--primary-color); */
 }
 
 .table-body-row{
     color: var(--secondary-color);  
     text-align: center;
-    /* border: 1px solid var(--secondary-color); */
+    border-bottom: 1px solid rgb(109, 109, 109);
+
 }
 .table-body-row>td{
-    border: 1px solid var(--secondary-color);
+    padding: 10px 0;
+}
+
+.fund-progress-bar{
+padding: 0;
 }
