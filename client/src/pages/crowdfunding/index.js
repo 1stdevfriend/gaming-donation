@@ -60,16 +60,18 @@ export const CrowdFunding = () => {
         if (!isNaN(totalAmt) && totalAmt) {
           setProgressBarStats((totalAmt * 100) / 10000);
           setDonatedYet(totalAmt);
+        } else {
+          setDonatedYet(0);
+          setProgressBarStats(0);
         }
         if (res?.data?.documents?.length) setFundDetails(res?.data?.documents);
-        else setFundDetails(null);
-
+        else setFundDetails([]);
         setFetchingStatus((pre) => ({ ...pre, loadingProgressBar: false }));
       } catch (error) {
         console.log("error", error?.message);
         window.alert("Unable to fetch fund progress details," + error?.message);
         setFetchingStatus(0);
-        setFundDetails(null);
+        setFundDetails([]);
       }
     };
     getFundDetails();
@@ -158,7 +160,7 @@ export const CrowdFunding = () => {
           <h6 className="fs-3 mb-3 p-0">Fund Progress</h6>
           {fetchingStatus.loadingProgressBar ? (
             <div className="p-0">Loading...</div>
-          ) : progressBarStats ? (
+          ) : progressBarStats >= 0 ? (
             <>
               <ProgressBar className="fund-progress-bar">
                 <ProgressBar
@@ -179,8 +181,6 @@ export const CrowdFunding = () => {
                   animated
                 />
                 <ProgressBar
-                  label={(100 - progressBarStats).toFixed(2) + "%"}
-                  // striped={true}
                   variant="secondary"
                   now={
                     Number((100 - progressBarStats).toFixed(2)) > 0
@@ -215,37 +215,39 @@ export const CrowdFunding = () => {
         </Row>
 
         <Row className="mt-5 col-lg-11 mx-auto ">
-          {/* col-md-11 mx-auto col-lg-8 col-xl-6  */}
           <h6 className="fs-3 mb-3 p-0">Fund Details</h6>
           {fetchingStatus.loadingProgressBar ? (
             "Loading..."
-          ) : fundDetails?.length ? (
-            <table>
-              <thead>
-                <tr className="fw-bold fs-6 table-head-row">
-                  <td>S.No</td>
-                  <td>DONAR NAME</td>
-                  <td>DONATED AMOUNT</td>
-                </tr>
-              </thead>
-              <tbody>
-                {fundDetails
-                  ?.slice(0)
-                  .reverse()
-                  .map((item, i) => (
-                    <tr
-                      key={item.amt + item.name + i}
-                      className="table-body-row"
-                    >
-                      <td>{i + 1}</td>
-                      <td>{item.name}</td>
-                      <td>{"₹ " + item.amt}</td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
           ) : (
-            "No data available."
+            <>
+              <table>
+                <thead>
+                  <tr className="fw-bold fs-6 table-head-row">
+                    <td>S.No</td>
+                    <td>DONAR NAME</td>
+                    <td>DONATED AMOUNT</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {fundDetails
+                    ?.slice(0)
+                    .reverse()
+                    .map((item, i) => (
+                      <tr
+                        key={item.amt + item.name + i}
+                        className="table-body-row"
+                      >
+                        <td>{i + 1}</td>
+                        <td>{item.name}</td>
+                        <td>{"₹ " + item.amt}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </>
+          )}
+          {!fundDetails?.length && (
+            <div className="text-center py-5">No data available</div>
           )}
         </Row>
       </Container>
