@@ -1,5 +1,5 @@
 const express = require("express");
-// const { checkoutUser } = require("../database/schemas/checkout.user");
+// const { donations } = require("../database/schemas/checkout.user");
 const { STRIPE_SK } = require("../config");
 const stripe = require("stripe")(STRIPE_SK);
 
@@ -25,8 +25,8 @@ router.post("/paynow", [express.json()], async (req, res) => {
         ],
         mode: "payment",
         // TODO => Need to update url in production
-        success_url: `http://localhost:3000/stripe-redirect/success`,
-        cancel_url: `http://localhost:3000/stripe-redirect/cancel`,
+        success_url: `http://localhost:8085/stripe-redirect/success`,
+        cancel_url: `http://localhost:8085/stripe-redirect/cancel`,
       });
       res.status(200).json({ msg: "Checkout URL", data: session.url });
     } else res.status(404).json({ msg: "Some keys are missing", data: null });

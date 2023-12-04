@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, ProgressBar, Row } from "react-bootstrap";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { meta } from "../../content_option";
-import donationImg from "../../assets/images/donate.jpeg";
+import donationImg from "../../assets/images/elegato.jpeg";
 
 import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -33,7 +33,7 @@ export const CrowdFunding = () => {
     try {
       if (!donationAmt) return;
       setFetchingStatus((pre) => ({ ...pre, loadingDonation: true }));
-      const res = await axios.post("http://localhost:3006/paynow", {
+      const res = await axios.post("http://localhost:8086/paynow", {
         amt: donationAmt,
       });
       window.open(res.data.data, "_self");
@@ -54,7 +54,7 @@ export const CrowdFunding = () => {
     const getFundDetails = async () => {
       try {
         setFetchingStatus((pre) => ({ ...pre, loadingProgressBar: true }));
-        const res = await axios.get("http://localhost:3006/get-fund");
+        const res = await axios.get("http://localhost:8086/get-fund");
         const totalAmt = Number(res?.data?.totalAmt);
 
         if (!isNaN(totalAmt) && totalAmt) {

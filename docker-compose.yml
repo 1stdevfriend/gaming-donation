@@ -1,0 +1,32 @@
+version: "3"
+services:
+  client:
+    image: node:16.14.0
+    working_dir: /app/client
+    volumes:
+      - ./client:/app/client
+    command: npm start
+    ports:
+      - "8085:3000"
+    depends_on:
+      - server
+  server:
+    image: node:16.14.0
+    working_dir: /app/server
+    volumes:
+      - ./server:/app/server
+    command: npm run dev
+    environment:
+      MONGO_URI: mongodb://mongo:27017/donations
+      STRIPE_SK: sk_test_51KWFsgSHHasEy1Tdc8jFLBYGE6KKfxWuFSfHUkWvDWCnNtbvUE9z7SpcfseydNaqbvaenY9PJ7WtBSlgCn2UGcwM00do9bxAsJ
+      ENDPOINT_SECRET: whsec_b43994674a23872644b6d60382474dcdad4b3eb3a14cd8ec976361a7c3ca058a
+    ports:
+      - "8086:3006"
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:latest
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"

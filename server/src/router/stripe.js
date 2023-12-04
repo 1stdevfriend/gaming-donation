@@ -2,7 +2,7 @@ const express = require("express");
 const { STRIPE_SK, ENDPOINT_SECRET } = require("../config");
 const stripe = require("stripe")(STRIPE_SK);
 
-const { checkoutUser } = require("../database/schemas/checkout.user");
+const { donations } = require("../database/schemas/checkout.user");
 
 const router = express.Router();
 let id = null;
@@ -31,7 +31,7 @@ router.post(
                 } else {
                   const dataObj = event?.data?.object;
                   const lineItems = session?.line_items.data;
-                  await checkoutUser.collection.insertOne({
+                  const re = await donations.collection.insertOne({
                     name: dataObj?.name || dataObj?.customer_details?.name,
                     amt: (lineItems[0]?.amount_total / 100).toFixed(2),
                     date: new Date(dataObj?.created * 1000)
@@ -39,6 +39,8 @@ router.post(
                       .split(",")[0],
                     id: dataObj.id,
                   });
+
+                  console.log("re--->", re);
                 }
               }
             );
@@ -47,7 +49,8 @@ router.post(
       }
       response.send();
     } catch (error) {
-      console.log(error?.message);
+      console.log("error----->");
+      console.log(error);
       response.send();
     }
   }

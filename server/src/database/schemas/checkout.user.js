@@ -1,7 +1,7 @@
 const { model, Schema } = require("mongoose");
 
-const checkoutUser = model(
-  "checkoutUser",
+const donations = model(
+  "donations",
   new Schema({
     name: String,
     amt: String,
@@ -10,4 +10,4 @@ const checkoutUser = model(
   })
 );
 
-module.exports = { checkoutUser };
+module.exports = { donations };
