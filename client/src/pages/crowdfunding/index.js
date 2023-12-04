@@ -9,7 +9,7 @@ import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export const CrowdFunding = () => {
-  const [donationAmt, setDonationAmt] = useState(0);
+  const [donationAmt, setDonationAmt] = useState(501);
   const [progressBarStats, setProgressBarStats] = useState(0);
   const [donatedYet, setDonatedYet] = useState(0);
   const [fundDetails, setFundDetails] = useState(null);
@@ -106,20 +106,23 @@ export const CrowdFunding = () => {
               <div className="d-flex gap-3 flex-wrap justify-content-center">
                 {[51, 101, 201, 501, 1001, "Other"].map((item) =>
                   item === "Other" ? (
-                    <input
-                      key={item}
-                      className="bg-transparent other-input"
-                      id="name"
-                      name="name"
-                      placeholder="Other"
-                      // value={formData.name || ""}
-                      type="number"
-                      onChange={handleChange}
-                    />
+                    <div className="other-input">
+                      <span>₹&nbsp;</span>
+                      <input
+                        key={item}
+                        className="bg-transparent "
+                        id="name"
+                        name="name"
+                        placeholder="Other"
+                        // value={formData.name || ""}
+                        type="number"
+                        onChange={handleChange}
+                      />
+                    </div>
                   ) : (
                     <button
                       onClick={() => handleSelectAmt(item)}
-                      className="btn ac_btn"
+                      className={`btn ac_btn`}
                       key={item}
                       style={{ minWidth: "5rem" }}
                     >
@@ -156,7 +159,7 @@ export const CrowdFunding = () => {
             <div className="p-0">Loading...</div>
           ) : progressBarStats ? (
             <>
-              <ProgressBar>
+              <ProgressBar className="fund-progress-bar">
                 <ProgressBar
                   className="progress-bar-striped"
                   style={{
@@ -164,8 +167,11 @@ export const CrowdFunding = () => {
                     borderTopLeftRadius: "4px",
                     borderBottomLeftRadius: "4px",
                   }}
-                  label={progressBarStats + "%"}
-                  variant="primary"
+                  label={
+                    (Number(progressBarStats) > 100 ? 100 : progressBarStats) +
+                    "%"
+                  }
+                  variant="secondary"
                   striped={true}
                   now={Number(progressBarStats.toFixed(2))}
                   key={1}
@@ -175,7 +181,11 @@ export const CrowdFunding = () => {
                   label={(100 - progressBarStats).toFixed(2) + "%"}
                   // striped={true}
                   variant="secondary"
-                  now={Number((100 - progressBarStats).toFixed(2))}
+                  now={
+                    Number((100 - progressBarStats).toFixed(2)) > 0
+                      ? Number((100 - progressBarStats).toFixed(2))
+                      : 0
+                  }
                   key={2}
                   style={{
                     height: "16px",
@@ -190,7 +200,7 @@ export const CrowdFunding = () => {
                 </div>
                 <div>
                   DONATIONS
-                  <br /> 40
+                  <br /> {fundDetails?.length || 0}
                 </div>
                 <div>
                   GOAL
@@ -212,17 +222,25 @@ export const CrowdFunding = () => {
             <table>
               <thead>
                 <tr className="fw-bold fs-6 table-head-row">
+                  <td>S.No</td>
                   <td>DONAR NAME</td>
                   <td>DONATED AMOUNT</td>
                 </tr>
               </thead>
               <tbody>
-                {fundDetails.map((item, i) => (
-                  <tr key={item.amt + item.name + i} className="table-body-row">
-                    <td>{item.name}</td>
-                    <td>{"₹ " + item.amt}</td>
-                  </tr>
-                ))}
+                {fundDetails
+                  ?.slice(0)
+                  .reverse()
+                  .map((item, i) => (
+                    <tr
+                      key={item.amt + item.name + i}
+                      className="table-body-row"
+                    >
+                      <td>{i + 1}</td>
+                      <td>{item.name}</td>
+                      <td>{"₹ " + item.amt}</td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           ) : (
