@@ -55,6 +55,14 @@ export const Home = () => {
                       <div className="ring three"></div>
                     </div>
                   </Link>
+                  <a href="https://koders.in" target="_blank">
+                    <div id="button_h" className="ac_btn btn">
+                      CEO at Koders
+                      <div className="ring one"></div>
+                      <div className="ring two"></div>
+                      <div className="ring three"></div>
+                    </div>
+                  </a>
                 </div>
               </div>
             </div>
