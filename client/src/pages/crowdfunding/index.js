@@ -33,7 +33,7 @@ export const CrowdFunding = () => {
     try {
       if (!donationAmt) return;
       setFetchingStatus((pre) => ({ ...pre, loadingDonation: true }));
-      const res = await axios.post("http://localhost:8086/paynow", {
+      const res = await axios.post("https://api.xhunter.in/paynow", {
         amt: donationAmt,
       });
       window.open(res.data.data, "_self");
@@ -54,7 +54,7 @@ export const CrowdFunding = () => {
     const getFundDetails = async () => {
       try {
         setFetchingStatus((pre) => ({ ...pre, loadingProgressBar: true }));
-        const res = await axios.get("http://localhost:8086/get-fund");
+        const res = await axios.get("https://api.xhunter.in/get-fund");
         const totalAmt = Number(res?.data?.totalAmt);
 
         if (!isNaN(totalAmt) && totalAmt) {
@@ -96,12 +96,13 @@ export const CrowdFunding = () => {
           <Col lg="6" className="d-flex mt-5 mt-lg-0">
             <div>
               <h6 className="display-4 mb-4 fs-3 text-center ">
-                Donate to our Community
+                Donate for Device Elegato HD S
               </h6>
               <p className="text-center fs-6">
-                Your donation helps us to offer and serve better services.
-                <br /> Your contribution, however big or small, is valuable for
-                our future.
+                This device can help me capture premium quality game records.
+                Throwing in your support can seriously level up my game
+                recordings. Big or small, your contribution means the world to
+                me!
               </p>
               <div className="d-flex gap-3 flex-wrap justify-content-center">
                 {[51, 101, 201, 501, 1001, "Other"].map((item) =>

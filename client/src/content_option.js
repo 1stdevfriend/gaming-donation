@@ -24,60 +24,65 @@ const dataabout = {
 };
 const worktimeline = [
   {
-    jobtitle: "Designer of week",
-    where: "YAdfi",
-    date: "2020",
+    jobtitle: "Started Switch Gaming",
+    where: "",
+    date: "2022",
   },
   {
-    jobtitle: "Designer of week",
-    where: "Jamalya",
-    date: "2019",
+    jobtitle: "Started PC Gaming",
+    where: "",
+    date: "2010",
   },
   {
-    jobtitle: "Designer of week",
-    where: "ALquds",
-    date: "2019",
+    jobtitle: "Started Playstation Gaming",
+    where: "",
+    date: "2008",
+  },
+  {
+    jobtitle: "Started Video Gaming",
+    where: "",
+    date: "2004",
   },
 ];
 
 const skills = [
   {
-    name: "Python",
+    name: "Gaming",
     value: 90,
   },
   {
-    name: "Djano",
+    name: "Development",
     value: 85,
   },
   {
-    name: "Javascript",
+    name: "Chai",
     value: 80,
   },
   {
-    name: "React",
+    name: "Procrastination",
     value: 60,
   },
   {
-    name: "Jquery",
+    name: "Sleeping",
     value: 85,
   },
 ];
 
 const services = [
   {
-    title: "UI & UX Design",
+    title: "Mutiplayer Gaming",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
+      "Join the excitement, challenge me to a game, and let's make some gaming memories together!",
+  },
+  {
+    title: "Web Apps",
+    description:
+      "Versatile online companions, delivering dynamic content and services through browsers, transcending device boundaries for accessible and efficient user interactions.",
   },
   {
     title: "Mobile Apps",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
-  },
-  {
-    title: "Wordpress Design",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
+      "Pocket-sized powerhouses, bringing convenience to your fingertips with seamless functionality and personalized experiences.",
   },
 ];
 
@@ -159,10 +164,10 @@ const contactConfig = {
   YOUR_EMAIL: "kartikmysterio@gmail.com",
   YOUR_FONE: "+91 7819800649",
   description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vehicula eu nunc et sollicitudin. Cras pulvinar, nisi at imperdiet pharetra. ",
-  YOUR_SERVICE_ID: "service_id",
-  YOUR_TEMPLATE_ID: "template_id",
-  YOUR_USER_ID: "user_id",
+    "Got game-related questions or just want to chat? I'm all ears! Let's dive into the gaming universe and amp up your experience. Your thoughts and stories are not just welcome; they're encouraged. Game on!",
+  YOUR_SERVICE_ID: "service_9fmkj1f",
+  YOUR_TEMPLATE_ID: "template_id0mkns",
+  YOUR_USER_ID: "YcWoBHvA9VenxNUnv",
 };
 
 const socialprofils = {
