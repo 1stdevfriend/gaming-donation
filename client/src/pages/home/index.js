@@ -55,7 +55,7 @@ export const Home = () => {
                       <div className="ring three"></div>
                     </div>
                   </Link>
-                  <a href="https://koders.in" target="_blank">
+                  <a href="https://koders.in" target="_blank" rel="noreferrer">
                     <div id="button_h" className="ac_btn btn">
                       CEO at Koders
                       <div className="ring one"></div>
