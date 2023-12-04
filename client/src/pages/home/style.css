@@ -44,6 +44,11 @@ section {
     }
 }
 
+.h_bg-image{
+    background-image: url("../../assets/images/profile.jpg");
+
+}
+
 .intro_sec .text,
 .intro_sec .h_bg-image {
     width: 50%;

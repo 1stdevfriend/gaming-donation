@@ -1,12 +1,12 @@
 const express = require("express");
-const { checkoutUser } = require("../database/schemas/checkout.user");
+const { donations } = require("../database/schemas/checkout.user");
 const { STRIPE_SK } = require("../config");
 
 const router = express.Router();
 
 router.get("/get-fund", [express.json()], async (req, res) => {
   try {
-    const totalAmt = await checkoutUser.aggregate([
+    const totalAmt = await donations.aggregate([
       {
         $group: {
           _id: null,
@@ -18,7 +18,7 @@ router.get("/get-fund", [express.json()], async (req, res) => {
         },
       },
     ]);
-    const documents = await checkoutUser.find({});
+    const documents = await donations.find({});
     console.log("documents", documents);
     res.status(200).json({ totalAmt: totalAmt[0]?.total, documents });
   } catch (error) {
