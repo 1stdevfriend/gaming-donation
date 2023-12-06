@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Col, Container, Row } from "react-bootstrap";
 
-import { meta } from "../../content_option";
+import { donationPageData, meta } from "../../content_option";
 import useDonation from "../../hooks/useDonation";
 import donationImg from "../../assets/images/elegato.jpeg";
 
@@ -11,6 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import MyProgressBar from "./components/ProgressBar";
 import DonarList from "./components/DonarList";
 import BtnContainer from "./components/BtnContainer";
+import AlertModal from "./components/AlertModal";
 
 export const CrowdFunding = () => {
   const {
@@ -26,7 +27,8 @@ export const CrowdFunding = () => {
 
   return (
     <HelmetProvider>
-      <Container>
+      <Container className="relative">
+        <AlertModal />
         <Helmet>
           <meta charSet="utf-8" />
           <title>{meta.title} | CrowdFunding</title>
@@ -34,7 +36,7 @@ export const CrowdFunding = () => {
         </Helmet>
         <Row className="mb-lg-5 mt-3 pt-md-3">
           <Col lg="8">
-            <h1 className="display-4 mb-4"> Funding</h1>
+            <h1 className="display-4 mb-4"> {donationPageData.title}</h1>
             <hr className="t_border my-4 ml-0 text-left" />
           </Col>
         </Row>
@@ -45,14 +47,9 @@ export const CrowdFunding = () => {
           <Col lg="6" className="d-flex mt-5 mt-lg-0">
             <div>
               <h6 className="display-4 mb-4 fs-3 text-center ">
-                Donate for Device Elegato HD60 S
+                {donationPageData.heading}
               </h6>
-              <p className="text-center fs-6">
-                This device can help me capture premium quality game records.
-                Throwing in your support can seriously level up my game
-                recordings. Big or small, your contribution means the world to
-                me!
-              </p>
+              <p className="text-center fs-6">{donationPageData.description}</p>
               <BtnContainer {...{ handleChange, handleSelectAmt }} />
               <button
                 disabled={fetchingStatus.loadingDonation}

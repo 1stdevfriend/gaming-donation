@@ -175,6 +175,14 @@ const socialprofils = {
   linkedin: "https://in.linkedin.com/in/kartikey-kushwah-57283614b",
   instagram: "https://instagram.com/1stdevfriend",
 };
+
+const donationPageData = {
+  title: "Funding",
+  heading: "Donate for Device Elegato HD60 S",
+  description:
+    " This device can help me capture premium quality game records.Throwing in your support can seriously level up my game recordings. Big or small, your contribution means the world to me!",
+};
+
 export {
   meta,
   dataabout,
@@ -186,4 +194,5 @@ export {
   contactConfig,
   socialprofils,
   logotext,
+  donationPageData,
 };
