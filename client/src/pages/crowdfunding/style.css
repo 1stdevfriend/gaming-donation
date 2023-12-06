@@ -1,74 +1,77 @@
 .other-input {
-    width: 6rem;
-    color: var(--text-color);
-    padding-left: 5px;
-    border: 2px solid var(--secondary-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 6rem;
+  color: var(--text-color);
+  padding-left: 5px;
+  border: 2px solid var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.other-input>input::placeholder{
-    padding-left: 5px;
-    color: var(--secondary-color);
+.other-input > input::placeholder {
+  padding-left: 5px;
+  color: var(--secondary-color);
 }
-.other-input>input::-ms-input-placeholder{
-    color: var(--secondary-color);
-}
-
-
-.other-input>input{
-    width: 90%;
-    outline: none;
-    border: none;
-    color: var(--text-color);
-    padding-bottom: 5px;
+.other-input > input::-ms-input-placeholder {
+  color: var(--secondary-color);
 }
 
+.other-input > input {
+  width: 90%;
+  outline: none;
+  border: none;
+  color: var(--text-color);
+  padding-bottom: 5px;
+}
 
-.progress-bar-info{
-    display: flex;
-    justify-content: space-between;
+.progress-bar-info {
+  display: flex;
+  justify-content: space-between;
 }
 .progress-bar-info > div {
-    margin-top: 1rem;
-width: 33%;
-
+  margin-top: 1rem;
+  width: 33%;
 }
-.progress-bar-info>div:nth-child(1){
-    text-align: start;
+.progress-bar-info > div:nth-child(1) {
+  text-align: start;
 }
-.progress-bar-info>div:nth-child(2){
-    text-align: center;
+.progress-bar-info > div:nth-child(2) {
+  text-align: center;
 }
-.progress-bar-info>div:nth-child(3){
-    text-align: end;
+.progress-bar-info > div:nth-child(3) {
+  text-align: end;
 }
-thead{
-    background-color:  var(--secondary-color);
-    border: none;
+thead {
+  background-color: var(--secondary-color);
+  border: none;
 }
-.table-head-row{
-    background-color:  rgb(109, 109, 109);
-    color: var(--secondary-color);
-    text-align: center;
-    padding: 10px 0;
-    /* border-left: 1px solid var(--secondary-color);
+.table-head-row {
+  background-color: rgb(109, 109, 109);
+  color: var(--secondary-color);
+  text-align: center;
+  padding: 10px 0;
+  /* border-left: 1px solid var(--secondary-color);
     border-right: 2px solid var(--secondary-color); */
 }
-.table-head-row>td{
-    /* border-right: 1px solid var(--primary-color); */
+.table-head-row > td {
+  /* border-right: 1px solid var(--primary-color); */
 }
 
-.table-body-row{
-    color: var(--secondary-color);  
-    text-align: center;
-    border-bottom: 1px solid rgb(109, 109, 109);
-
+.table-body-row {
+  color: var(--secondary-color);
+  text-align: center;
+  border-bottom: 1px solid rgb(109, 109, 109);
 }
-.table-body-row>td{
-    padding: 10px 0;
+.table-body-row > td {
+  padding: 10px 0;
 }
 
-.fund-progress-bar{
-padding: 0;
+.fund-progress-bar {
+  padding: 0;
+}
+
+.donate-btn {
+  min-width: 10rem;
+  max-width: 11rem;
+  overflow: hidden;
+  white-space: nowrap;
 }
