@@ -18,17 +18,19 @@ export const CrowdFunding = () => {
     handleSelectAmt,
     handleChange,
     handleDonate,
+    handleCloseModal,
     donationAmt,
     progressBarStats,
     donatedYet,
     fundDetails,
     fetchingStatus,
+    isFundCollected,
   } = useDonation();
 
   return (
     <HelmetProvider>
       <Container className="relative">
-        <AlertModal />
+        {isFundCollected && <AlertModal {...{ handleCloseModal }} />}
         <Helmet>
           <meta charSet="utf-8" />
           <title>{meta.title} | CrowdFunding</title>

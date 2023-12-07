@@ -1,7 +1,8 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import client from "../utils/api";
 
 const useDonation = () => {
+  const [isFundCollected, setIsFundCollected] = useState(false);
   const [donationAmt, setDonationAmt] = useState(501);
   const [progressBarStats, setProgressBarStats] = useState(0);
   const [donatedYet, setDonatedYet] = useState(0);
@@ -10,7 +11,6 @@ const useDonation = () => {
     loadingDonation: false,
     loadingProgressBar: true,
   });
-
   const handleSelectAmt = (amt) => {
     setDonationAmt(Number(amt));
   };
@@ -26,7 +26,7 @@ const useDonation = () => {
     try {
       if (!donationAmt) return;
       setFetchingStatus((pre) => ({ ...pre, loadingDonation: true }));
-      const res = await axios.post("https://api.xhunter.in/paynow", {
+      const res = await client.post("paynow", {
         amt: donationAmt,
       });
       window.open(res.data.data, "_self");
@@ -47,12 +47,13 @@ const useDonation = () => {
     const getFundDetails = async () => {
       try {
         setFetchingStatus((pre) => ({ ...pre, loadingProgressBar: true }));
-        const res = await axios.get("https://api.xhunter.in/get-fund");
+        const res = await client.get("get-fund");
         const totalAmt = Number(res?.data?.totalAmt);
 
         if (!isNaN(totalAmt) && totalAmt) {
           setProgressBarStats((totalAmt * 100) / 10000);
           setDonatedYet(totalAmt);
+          if (totalAmt >= 10000) setIsFundCollected(true);
         } else {
           setDonatedYet(0);
           setProgressBarStats(0);
@@ -70,15 +71,21 @@ const useDonation = () => {
     getFundDetails();
   }, []);
 
+  const handleCloseModal = () => {
+    setIsFundCollected(false);
+  };
+
   return {
     handleSelectAmt,
     handleChange,
     handleDonate,
+    handleCloseModal,
     donationAmt,
     progressBarStats,
     donatedYet,
     fundDetails,
     fetchingStatus,
+    isFundCollected,
   };
 };
 

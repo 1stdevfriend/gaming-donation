@@ -3,11 +3,11 @@ import React from "react";
 import "../style.css";
 import { FaPlus } from "react-icons/fa";
 
-const AlertModal = () => {
+const AlertModal = ({ handleCloseModal }) => {
   return (
-    <div className="alert-modal flex-utility">
+    <div onClick={handleCloseModal} className="alert-modal flex-utility">
       <div className="flex-utility data-container">
-        <FaPlus className="close-btn" />
+        <FaPlus onClick={handleCloseModal} className="close-btn" />
         <div className="modal-data">
           <div>🌟 Goal Achieved! Funding Closed! 🌟</div>{" "}
           <div> Dear Visitor,</div>

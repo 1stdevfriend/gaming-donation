@@ -1,3 +1,7 @@
+// BASE_URL: https://api.xhunter.in
+
+const BASE_URL = "http://localhost:8086/";
+
 const logotext = "XHUNTER";
 const meta = {
   title: "XHunter",
@@ -195,4 +199,5 @@ export {
   socialprofils,
   logotext,
   donationPageData,
+  BASE_URL,
 };
