@@ -17,7 +17,7 @@ router.post("/paynow", [express.json()], async (req, res) => {
               product_data: {
                 name: "Donation",
                 description: "Donate for Elegato HD 60 S",
-                Image: [
+                images: [
                   "https://i.pcmag.com/imagery/reviews/04dRlD6i7f8OrAtbWbNfZoB-3.fit_scale.size_1028x578.v1569482971.jpg",
                 ],
               },
