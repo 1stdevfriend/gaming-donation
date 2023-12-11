@@ -153,11 +153,15 @@ export const CrowdFunding = () => {
                   <span>DONATE {donationAmt ? " ₹" + donationAmt : ""}</span>
                 )}
               </button>
+	      <br />
+              <p className="text-center fs-6">
+	  	Pay via UPI at <b>xhunter@upi</b> and drop a mail so I can add you as a backer :) 
+              </p>
             </div>
           </Col>
         </Row>
         <Row className="progress-bar-container col-lg-11 mx-auto">
-          <h6 className="fs-3 mb-3 p-0">Fund Progress</h6>
+          <h6 className="fs-3 mb-3 p-0">Backing Progress</h6>
           {fetchingStatus.loadingProgressBar ? (
             <div className="p-0">Loading...</div>
           ) : progressBarStats >= 0 ? (
@@ -215,7 +219,7 @@ export const CrowdFunding = () => {
         </Row>
 
         <Row className="mt-5 col-lg-11 mx-auto ">
-          <h6 className="fs-3 mb-3 p-0">Fund Details</h6>
+          <h6 className="fs-3 mb-3 p-0">Backer Details</h6>
           {fetchingStatus.loadingProgressBar ? (
             "Loading..."
           ) : (
@@ -224,8 +228,8 @@ export const CrowdFunding = () => {
                 <thead>
                   <tr className="fw-bold fs-6 table-head-row">
                     <td>S.No</td>
-                    <td>DONAR NAME</td>
-                    <td>DONATED AMOUNT</td>
+                    <td>Name</td>
+                    <td>Amount</td>
                   </tr>
                 </thead>
                 <tbody>
