@@ -18,8 +18,8 @@ services:
     command: npm run dev
     environment:
       MONGO_URI: mongodb://mongo:27017/donations
-      STRIPE_SK: sk_test_51KaepzSA1obQzSJsubYbbYkyZDiVSd2NekU4CMOtbGC5GlRjsLEWM5g7Um5feRWxaN1pUuLWjm2wnRZhDlVKAJ0q005ZsjdkP4
-      ENDPOINT_SECRET: whsec_dfa376d13fd48abea9149cfd5abcce0d93a52b149ac1a2fc9b46ad894c910c80
+      STRIPE_SK: 
+      ENDPOINT_SECRET: 
     ports:
       - "8086:3006"
     depends_on:
