@@ -4,7 +4,7 @@ const express = require("express");
 const router = require("./router/index");
 const { createConnectionPool } = require("./database/helpers");
 
-const PORT = 3006;
+const PORT = 3000;
 const app = express();
 
 app.disable("x-powered-by");
