@@ -5,7 +5,7 @@ services:
         context: ./client/
         dockerfile: Dockerfile
       ports:
-        - "8080:80"
+        - "8085:80"
   server:
     image: node:16.14.0
     working_dir: /app/server
@@ -14,8 +14,8 @@ services:
     command: npm start
     environment:
       MONGO_URI: mongodb://mongo:27017/donations
-      STRIPE_SK: 
-      ENDPOINT_SECRET: 
+      STRIPE_SK: ${STRIPE_SK}
+      ENDPOINT_SECRET: ${STRIPE_WHSEC}
     ports:
       - "8086:3006"
     depends_on:
