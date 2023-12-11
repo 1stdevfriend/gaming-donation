@@ -17,7 +17,7 @@ router.post("/paynow", [express.json()], async (req, res) => {
               product_data: {
                 name: "Donation",
                 description: "Donate for Elegato HD 60 S",
-                Image: [
+                images: [
                   "https://i.pcmag.com/imagery/reviews/04dRlD6i7f8OrAtbWbNfZoB-3.fit_scale.size_1028x578.v1569482971.jpg",
                 ],
               },
@@ -27,9 +27,8 @@ router.post("/paynow", [express.json()], async (req, res) => {
           },
         ],
         mode: "payment",
-        // TODO => Need to update url in production
-        success_url: `http://localhost:8085/stripe-redirect/success`,
-        cancel_url: `http://localhost:8085/stripe-redirect/cancel`,
+        success_url: `https://xhunter.in/stripe-redirect/success`,
+        cancel_url: `https://xhunter.in/stripe-redirect/cancel`,
       });
       res.status(200).json({ msg: "Checkout URL", data: session.url });
     } else res.status(404).json({ msg: "Some keys are missing", data: null });
