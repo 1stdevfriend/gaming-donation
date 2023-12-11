@@ -18,7 +18,8 @@ jobs:
         with:
           host: ${{ secrets.REMOTE_HOST }}
           user: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.REMOTE_PASSWORD }}
+          pass: ${{ secrets.REMOTE_PASSWORD}}
+          port: 22
           script: |
             cd /root/donations/gaming-donation
             docker-compose down
