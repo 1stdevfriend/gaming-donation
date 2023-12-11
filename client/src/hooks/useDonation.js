@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import client from "../utils/api";
+import { useDispatch } from "react-redux";
+import { updateModalState } from "../features/appSlice";
 
 const useDonation = () => {
   const [isFundCollected, setIsFundCollected] = useState(false);
@@ -11,6 +13,9 @@ const useDonation = () => {
     loadingDonation: false,
     loadingProgressBar: true,
   });
+
+  const dispatch = useDispatch();
+
   const handleSelectAmt = (amt) => {
     setDonationAmt(Number(amt));
   };
@@ -53,7 +58,10 @@ const useDonation = () => {
         if (!isNaN(totalAmt) && totalAmt) {
           setProgressBarStats((totalAmt * 100) / 10000);
           setDonatedYet(totalAmt);
-          if (totalAmt >= 10000) setIsFundCollected(true);
+          if (totalAmt >= 10000) {
+            setIsFundCollected(true);
+            dispatch(updateModalState(true));
+          }
         } else {
           setDonatedYet(0);
           setProgressBarStats(0);
@@ -69,10 +77,10 @@ const useDonation = () => {
       }
     };
     getFundDetails();
-  }, []);
+  }, [dispatch]);
 
   const handleCloseModal = () => {
-    setIsFundCollected(false);
+    dispatch(updateModalState(false));
   };
 
   return {
