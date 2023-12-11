@@ -42,9 +42,6 @@ jobs:
               echo "Git pull failed. Check repository and credentials."
               exit 1
             fi
-
-          host: ${{ secrets.HOST }}
-          user: ${{ secrets.USERNAME }}
-          pass: ${{ secrets.PASSWORD}}
-          port: ${{ secrets.PORT}}
-            
+          host: ${{ secrets.REMOTE_HOST }}
+          user: ${{ secrets.REMOTE_USER }}
+          pass: ${{ secrets.REMOTE_PASSWORD}}            
