@@ -1,0 +1,48 @@
+name: Deploy Gaming Donation Website
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SSH into Remote Server and Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          user: ${{ secrets.REMOTE_USER }}
+          pass: ${{ secrets.REMOTE_PASSWORD }}
+          port: ${{ secrets.REMOTE_PORT }}
+          script: |
+            cd /root/donations/gaming-donation
+            docker-compose down
+
+            export STRIPE_SK=${{ secrets.STRIPE_SK }}
+            export STRIPE_WHSEC=${{ secrets.STRIPE_WHSEC }}
+            export EMAILJS_KEY=${{ secrets.EMAILJS_KEY }}
+            
+            git pull
+
+            GIT_PULL_EXIT_CODE=$?
+            
+            if [ $GIT_PULL_EXIT_CODE -eq 0 ]; then
+              echo "Git pull successful. Updating and restarting Docker Compose."
+              docker-compose pull
+              docker-compose up -d
+            elif [ $GIT_PULL_EXIT_CODE -eq 1 ]; then
+              echo "Git pull resulted in conflicts. Resolve conflicts and push changes."
+              git stash
+              git pull
+              docker-compose pull
+              docker-compose up -d
+            else
+              echo "Git pull failed. Check repository and credentials."
+              exit 1
+            fi
