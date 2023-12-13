@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
-import withRouter from "../hooks/withRouter";
+
 import AppRoutes from "./routes";
 import Headermain from "../header";
+import withRouter from "../hooks/withRouter";
 import AnimatedCursor from "../hooks/AnimatedCursor";
+
 import "./App.css";
-import AlertModal from "../pages/crowdfunding/components/AlertModal";
-import { useSelector } from "react-redux";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function _ScrollToTop(props) {
   const { pathname } = useLocation();
@@ -19,7 +19,7 @@ function _ScrollToTop(props) {
 const ScrollToTop = withRouter(_ScrollToTop);
 
 export default function App() {
-  const isFundCollected = useSelector((state) => state.appSlice.fundingModal);
+  // const isFundCollected = useSelector((state) => state.appSlice.fundingModal);
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <div className="cursor__dot">
@@ -32,7 +32,7 @@ export default function App() {
           outerScale={5}
         />
       </div>
-      {isFundCollected && <AlertModal />}
+      {/* {isFundCollected && <AlertModal />} */}
       <ScrollToTop>
         <Headermain />
         <AppRoutes />

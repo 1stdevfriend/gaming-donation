@@ -3,14 +3,8 @@ import s60 from "../../../assets/images/s60.jpeg";
 
 import "../style.css";
 import { FaPlus } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { updateModalState } from "../../../features/appSlice";
 
-const AlertModal = () => {
-  const dispatch = useDispatch();
-  const handleCloseModal = () => {
-    dispatch(updateModalState(false));
-  };
+const AlertModal = ({ handleCloseModal }) => {
   return (
     <div onClick={handleCloseModal} className="alert-modal flex-utility">
       <div className="flex-utility data-container">

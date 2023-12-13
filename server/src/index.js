@@ -2,12 +2,13 @@ const cors = require("cors");
 
 const express = require("express");
 const router = require("./router/index");
-const { createConnectionPool } = require("./database/helpers");
+const { createConnectionPool } = require("./database");
 
-const PORT = 3000;
+const PORT = 3006;
 const app = express();
 
 app.disable("x-powered-by");
+// TODO:=> In production whitelist specific host only
 app.use(cors());
 
 app.use(router);

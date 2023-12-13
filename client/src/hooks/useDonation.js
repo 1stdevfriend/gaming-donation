@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import client from "../utils/api";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
+
+import client from "../utils/api";
 import { updateModalState } from "../features/appSlice";
 
 const useDonation = () => {
@@ -13,6 +14,9 @@ const useDonation = () => {
     loadingDonation: false,
     loadingProgressBar: true,
   });
+  // const isFundCollected = useSelector((state) => state.appSlice.fundingModal);
+
+  const [device, setDevice] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -31,8 +35,9 @@ const useDonation = () => {
     try {
       if (!donationAmt) return;
       setFetchingStatus((pre) => ({ ...pre, loadingDonation: true }));
-      const res = await client.post("paynow", {
+      const res = await client.post("pay-now", {
         amt: donationAmt,
+        ...device,
       });
       window.open(res.data.data, "_self");
       setFetchingStatus((pre) => ({ ...pre, loadingDonation: false }));
@@ -48,39 +53,51 @@ const useDonation = () => {
     }
   };
 
-  useEffect(() => {
-    const getFundDetails = async () => {
-      try {
-        setFetchingStatus((pre) => ({ ...pre, loadingProgressBar: true }));
-        const res = await client.get("get-fund");
-        const totalAmt = Number(res?.data?.totalAmt);
+  const handleCloseModal = () => {
+    setIsFundCollected(false);
+  };
 
-        if (!isNaN(totalAmt) && totalAmt) {
-          setProgressBarStats((totalAmt * 100) / 10000);
-          setDonatedYet(totalAmt);
-          if (totalAmt >= 10000) {
-            setIsFundCollected(true);
-            dispatch(updateModalState(true));
-          }
-        } else {
-          setDonatedYet(0);
-          setProgressBarStats(0);
-        }
-        if (res?.data?.documents?.length) setFundDetails(res?.data?.documents);
-        else setFundDetails([]);
-        setFetchingStatus((pre) => ({ ...pre, loadingProgressBar: false }));
-      } catch (error) {
-        console.log("error", error?.message);
-        window.alert("Unable to fetch fund progress details," + error?.message);
+  const handleSelectDevice = async (productInfo) => {
+    setDevice(productInfo);
+    await handleFetchDeviceData(productInfo?.productName);
+  };
+  const handleFetchDeviceData = async (device) => {
+    try {
+      setFetchingStatus((pre) => ({ ...pre, loadingProgressBar: true }));
+      const res = await client.get(`get-fund?device=${device}`);
+
+      const userList = res?.data?.result?.donarList;
+      if (!userList?.length) {
         setFetchingStatus(0);
         setFundDetails([]);
+        setDonatedYet(0);
+        setProgressBarStats(0);
+        return;
       }
-    };
-    getFundDetails();
-  }, [dispatch]);
+      setFundDetails(userList);
+      let totalAmt = 0;
+      for (let i = 0; i < userList.length; i++) {
+        totalAmt = totalAmt + Number(userList[i].amt);
+      }
 
-  const handleCloseModal = () => {
-    dispatch(updateModalState(false));
+      if (totalAmt) {
+        setProgressBarStats((totalAmt * 100) / 10000);
+        setDonatedYet(totalAmt);
+        if (totalAmt >= 10000) {
+          setIsFundCollected(true);
+          dispatch(updateModalState(true));
+        }
+      } else {
+        setDonatedYet(0);
+        setProgressBarStats(0);
+      }
+      setFetchingStatus((pre) => ({ ...pre, loadingProgressBar: false }));
+    } catch (error) {
+      console.log("error", error?.message);
+      window.alert("Unable to fetch fund progress details," + error?.message);
+      setFetchingStatus(0);
+      setFundDetails([]);
+    }
   };
 
   return {
@@ -94,6 +111,8 @@ const useDonation = () => {
     fundDetails,
     fetchingStatus,
     isFundCollected,
+    device,
+    handleSelectDevice,
   };
 };
 
