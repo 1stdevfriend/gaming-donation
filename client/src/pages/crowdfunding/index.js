@@ -31,7 +31,7 @@ export const CrowdFunding = () => {
 
   return (
     <HelmetProvider>
-      {isFundCollected && <AlertModal {...{ handleCloseModal }} />}
+      {isFundCollected && <AlertModal {...{ handleCloseModal, device }} />}
       <Container className="relative">
         <Helmet>
           <meta charSet="utf-8" />
