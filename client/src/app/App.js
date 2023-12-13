@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, useLocation } from "react-router-dom";
+import { HashRouter as Router, useLocation } from "react-router-dom";
 import withRouter from "../hooks/withRouter";
 import AppRoutes from "./routes";
 import Headermain from "../header";
