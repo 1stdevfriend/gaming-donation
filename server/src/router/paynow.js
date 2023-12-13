@@ -1,24 +1,24 @@
 const express = require("express");
-// const { donations } = require("../database/schemas/checkout.user");
 const { STRIPE_SK } = require("../config");
 const stripe = require("stripe")(STRIPE_SK);
 
 const router = express.Router();
 
-router.post("/paynow", [express.json()], async (req, res) => {
+router.post("/pay-now", [express.json()], async (req, res) => {
   try {
-    const { amt } = req.body;
-    if (amt) {
+    const { amt, productName, productImage } = req.body;
+    if (amt && productName && productImage) {
       const session = await stripe.checkout.sessions.create({
         line_items: [
           {
             price_data: {
               currency: "inr",
               product_data: {
-                name: "Donation",
-                description: "Donate for Elegato HD 60 S",
+                name: productName,
+                description: "Donate for gaming community",
                 images: [
-                  "https://i.pcmag.com/imagery/reviews/04dRlD6i7f8OrAtbWbNfZoB-3.fit_scale.size_1028x578.v1569482971.jpg",
+                  productImage ||
+                    "https://i.pcmag.com/imagery/reviews/04dRlD6i7f8OrAtbWbNfZoB-3.fit_scale.size_1028x578.v1569482971.jpg",
                 ],
               },
               unit_amount: Math.round(Number(amt)) * 100,
@@ -27,6 +27,9 @@ router.post("/paynow", [express.json()], async (req, res) => {
           },
         ],
         mode: "payment",
+        // TODO:=> use in dev mode
+        // success_url: `http://localhost:3000/stripe-redirect/success`,
+        // cancel_url: `https://localhost:3000/stripe-redirect/cancel`,
         success_url: `https://xhunter.in/stripe-redirect/success`,
         cancel_url: `https://xhunter.in/stripe-redirect/cancel`,
       });

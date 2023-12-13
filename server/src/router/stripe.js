@@ -1,8 +1,8 @@
 const express = require("express");
 const { STRIPE_SK, ENDPOINT_SECRET } = require("../config");
+const { User } = require("../models/user.models");
+const { Device } = require("../models/device.models");
 const stripe = require("stripe")(STRIPE_SK);
-
-const { donations } = require("../database/schemas/checkout.user");
 
 const router = express.Router();
 let id = null;
@@ -29,9 +29,9 @@ router.post(
                 if (err) {
                   console.error(err);
                 } else {
-                  const dataObj = event?.data?.object;
                   const lineItems = session?.line_items.data;
-                  const re = await donations.collection.insertOne({
+                  const dataObj = event?.data?.object;
+                  const insertedUser = await User.collection.insertOne({
                     name: dataObj?.name || dataObj?.customer_details?.name,
                     amt: (lineItems[0]?.amount_total / 100).toFixed(2),
                     date: new Date(dataObj?.created * 1000)
@@ -39,17 +39,25 @@ router.post(
                       .split(",")[0],
                     id: dataObj.id,
                   });
-
-                  console.log("re--->", re);
+                  if (insertedUser.insertedId.toString()) {
+                    const result = await Device.collection.updateOne(
+                      { name: lineItems[0]?.description },
+                      {
+                        $addToSet: {
+                          donarList: insertedUser.insertedId.toString(),
+                        },
+                      }
+                    );
+                  }
                 }
               }
             );
+            break;
           }
         }
       }
       response.send();
     } catch (error) {
-      console.log("error----->");
       console.log(error);
       response.send();
     }

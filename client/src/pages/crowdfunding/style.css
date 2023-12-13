@@ -138,6 +138,33 @@ thead {
 } */
 
 
+/* -----Product list container------- */
+
+.product-list-container{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+}
+.list-heading{
+  color: white;
+  font-weight: 700;
+  margin: 1rem 0;
+  font-size: 2em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 800px) {
     .data-container{
         width: 60%;

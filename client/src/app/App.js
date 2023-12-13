@@ -6,8 +6,6 @@ import AppRoutes from "./routes";
 import Headermain from "../header";
 import AnimatedCursor from "../hooks/AnimatedCursor";
 import "./App.css";
-import AlertModal from "../pages/crowdfunding/components/AlertModal";
-import { useSelector } from "react-redux";
 
 function _ScrollToTop(props) {
   const { pathname } = useLocation();
@@ -19,7 +17,6 @@ function _ScrollToTop(props) {
 const ScrollToTop = withRouter(_ScrollToTop);
 
 export default function App() {
-  const isFundCollected = useSelector((state) => state.appSlice.fundingModal);
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <div className="cursor__dot">
@@ -32,7 +29,6 @@ export default function App() {
           outerScale={5}
         />
       </div>
-      {isFundCollected && <AlertModal />}
       <ScrollToTop>
         <Headermain />
         <AppRoutes />

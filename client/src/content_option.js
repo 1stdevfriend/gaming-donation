@@ -1,6 +1,6 @@
-// BASE_URL: https://api.xhunter.in
-
-const BASE_URL = "http://localhost:8086/";
+const BASE_URL = "https://api.xhunter.in";
+// use in dev mode only
+// const BASE_URL = "http://localhost:3006/";
 
 const logotext = "XHUNTER";
 const meta = {
@@ -187,6 +187,59 @@ const donationPageData = {
     " This device can help me capture premium quality game records.Throwing in your support can seriously level up my game recordings. Big or small, your contribution means the world to me!",
 };
 
+const productList = [
+  {
+    productName: "Gaming Console",
+    productImage:
+      "https://i.pcmag.com/imagery/reviews/04dRlD6i7f8OrAtbWbNfZoB-3.fit_scale.size_1028x578.v1569482971.jpg",
+  },
+  {
+    productName: "Gaming PC",
+    productImage:
+      "https://imgs.search.brave.com/j_nGr15TooFsRPylodJCLwP3_gtpofUHfpDwqS4nQUw/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvZmVhdHVy/ZWQvZ2FtaW5nLWJh/Y2tncm91bmQtazA4/aW5jeTNzemlmdzQy/ZS5qcGc",
+  },
+  {
+    productName: "Gaming Laptop",
+    productImage:
+      "https://imgs.search.brave.com/Jd-gXripl5i2FgEqJ7_k0_qXGFyegdGgFdC6dfFm5Q0/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvZmVhdHVy/ZWQvZ2FtaW5nLXBp/Y3R1cmVzLW12c3ox/a2toMXhkbHNmNjgu/anBn",
+  },
+  {
+    productName: "Gaming Mouse",
+    productImage:
+      "https://imgs.search.brave.com/yk2lYjhLmMvgHMn7QglHekURFTh7P2OL-Csg5KCJh3Y/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by8z/ZC13b3Jrc3RhdGlv/bi13aXRoLWNvbXB1/dGVyLXBlcmlwaGVy/YWwtZGV2aWNlc18y/My0yMTUwNzE0MjAx/LmpwZz9zaXplPTYy/NiZleHQ9anBn",
+  },
+  {
+    productName: "Gaming Keyboard",
+    productImage:
+      "https://i.pcmag.com/imagery/reviews/04dRlD6i7f8OrAtbWbNfZoB-3.fit_scale.size_1028x578.v1569482971.jpg",
+  },
+  {
+    productName: "Gaming Headset",
+    productImage:
+      "https://imgs.search.brave.com/j_nGr15TooFsRPylodJCLwP3_gtpofUHfpDwqS4nQUw/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvZmVhdHVy/ZWQvZ2FtaW5nLWJh/Y2tncm91bmQtazA4/aW5jeTNzemlmdzQy/ZS5qcGc",
+  },
+  {
+    productName: "Gaming Monitor",
+    productImage:
+      "https://imgs.search.brave.com/yk2lYjhLmMvgHMn7QglHekURFTh7P2OL-Csg5KCJh3Y/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by8z/ZC13b3Jrc3RhdGlv/bi13aXRoLWNvbXB1/dGVyLXBlcmlwaGVy/YWwtZGV2aWNlc18y/My0yMTUwNzE0MjAx/LmpwZz9zaXplPTYy/NiZleHQ9anBn",
+  },
+  {
+    productName: "Gaming Controller",
+    productImage:
+      "https://imgs.search.brave.com/j_nGr15TooFsRPylodJCLwP3_gtpofUHfpDwqS4nQUw/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvZmVhdHVy/ZWQvZ2FtaW5nLWJh/Y2tncm91bmQtazA4/aW5jeTNzemlmdzQy/ZS5qcGc",
+  },
+  {
+    productName: "VR Headset",
+    productImage:
+      "https://i.pcmag.com/imagery/reviews/04dRlD6i7f8OrAtbWbNfZoB-3.fit_scale.size_1028x578.v1569482971.jpg",
+  },
+  {
+    productName: "Gaming Capture Card",
+    productImage:
+      "https://imgs.search.brave.com/yk2lYjhLmMvgHMn7QglHekURFTh7P2OL-Csg5KCJh3Y/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by8z/ZC13b3Jrc3RhdGlv/bi13aXRoLWNvbXB1/dGVyLXBlcmlwaGVy/YWwtZGV2aWNlc18y/My0yMTUwNzE0MjAx/LmpwZz9zaXplPTYy/NiZleHQ9anBn",
+  },
+];
+
 export {
   meta,
   dataabout,
@@ -200,4 +253,5 @@ export {
   logotext,
   donationPageData,
   BASE_URL,
+  productList,
 };
