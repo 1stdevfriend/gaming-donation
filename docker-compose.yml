@@ -1,25 +1,21 @@
 version: "3"
 services:
-  client:
-    image: node:16.14.0
-    working_dir: /app/client
-    volumes:
-      - ./client:/app/client
-    command: npm start
-    ports:
-      - "8085:3000"
-    depends_on:
-      - server
+  react:
+      build: 
+        context: ./client/
+        dockerfile: Dockerfile
+      ports:
+        - "8085:80"
   server:
     image: node:16.14.0
     working_dir: /app/server
     volumes:
       - ./server:/app/server
-    command: npm run dev
+    command: npm start
     environment:
-      MONGO_URI: mongodb://localhost:27017/donations
-      STRIPE_SK:
-      ENDPOINT_SECRET:
+      MONGO_URI: mongodb://mongo:27017/donations
+      STRIPE_SK: ${STRIPE_SK}
+      ENDPOINT_SECRET: ${STRIPE_WHSEC}
     ports:
       - "8086:3006"
     depends_on:
