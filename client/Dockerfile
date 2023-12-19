@@ -2,8 +2,9 @@
 FROM node:16.14.0 as build
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 COPY . .
+RUN rm -rf /app/build
 RUN npm run build
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
