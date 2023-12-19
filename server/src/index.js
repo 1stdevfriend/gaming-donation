@@ -1,21 +1,14 @@
-const cors = require("cors");
+import { PORT } from "./config.js";
+import connectDB from "./db/index.js";
+import { app } from "./app.js";
 
-const express = require("express");
-const router = require("./router/index");
-const { createConnectionPool } = require("./database");
-
-const PORT = 3006;
-const app = express();
-
-app.disable("x-powered-by");
-// TODO:=> In production whitelist specific host only
-app.use(cors());
-
-app.use(router);
-
-app.listen(PORT, async () => {
-  console.log(`Server listen on ${PORT}`);
-  createConnectionPool();
-});
-
-module.exports = app;
+connectDB()
+  .then(() => {
+    app.listen(PORT || 8085, () => {
+      console.log(`Server is listening on port:${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.log("MongoDB connection failed!!", error);
+    process.exit(1);
+  });

@@ -1,9 +1,9 @@
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config({
+  path: "./env",
+});
 
-const { STRIPE_SK, MONGO_URI, ENDPOINT_SECRET } = process.env;
+const { STRIPE_SK, MONGO_URI, ENDPOINT_SECRET, PORT, CORS_ORIGIN } =
+  process.env;
 
-module.exports = {
-  mongoURI: MONGO_URI,
-  STRIPE_SK,
-  ENDPOINT_SECRET,
-};
+export { MONGO_URI, STRIPE_SK, ENDPOINT_SECRET, PORT, CORS_ORIGIN };
