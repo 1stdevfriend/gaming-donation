@@ -93,6 +93,11 @@ export const CrowdFunding = () => {
                       </span>
                     )}
                   </button>
+                  <br />
+                  <p className="text-center fs-6">
+                    Pay via UPI at <b>xhunter@upi</b> and drop a mail so I can
+                    add you as a backer :)
+                  </p>
                 </div>
               </Col>
             </Row>
