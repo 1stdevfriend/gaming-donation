@@ -1,4 +1,5 @@
-const { model, Schema, default: mongoose } = require("mongoose");
+// const { model, Schema, default: mongoose } = require("mongoose");
+import { model, Schema } from "mongoose";
 
 const deviceSchema = new Schema(
   {
@@ -9,7 +10,7 @@ const deviceSchema = new Schema(
     },
     donarList: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User",
       },
     ],
@@ -19,4 +20,4 @@ const deviceSchema = new Schema(
 
 const Device = model("Device", deviceSchema);
 
-module.exports = { Device };
+export { Device };
