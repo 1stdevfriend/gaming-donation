@@ -31,13 +31,13 @@ jobs:
             if [ $GIT_PULL_EXIT_CODE -eq 0 ]; then
               echo "Git pull successful. Updating and restarting Docker Compose."
               docker-compose pull
-              docker-compose up -d
+              docker-compose up -d --build
             elif [ $GIT_PULL_EXIT_CODE -eq 1 ]; then
               echo "Git pull resulted in conflicts. Resolve conflicts and push changes."
               git stash
               git pull
               docker-compose pull
-              docker-compose up -d
+              docker-compose up -d --build
             else
               echo "Git pull failed. Check repository and credentials."
               exit 1
