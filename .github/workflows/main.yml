@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  Deployment:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,11 +23,11 @@ jobs:
             export STRIPE_SK=${{ secrets.STRIPE_SK }}
             export STRIPE_WHSEC=${{ secrets.STRIPE_WHSEC }}
             export EMAILJS_KEY=${{ secrets.EMAILJS_KEY }}
-            
+
             git pull
 
             GIT_PULL_EXIT_CODE=$?
-            
+
             if [ $GIT_PULL_EXIT_CODE -eq 0 ]; then
               echo "Git pull successful. Updating and restarting Docker Compose."
               docker-compose pull
@@ -44,4 +44,4 @@ jobs:
             fi
           host: ${{ secrets.REMOTE_HOST }}
           user: ${{ secrets.REMOTE_USER }}
-          pass: ${{ secrets.REMOTE_PASSWORD}}            
+          pass: ${{ secrets.REMOTE_PASSWORD}}
