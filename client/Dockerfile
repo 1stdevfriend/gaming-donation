@@ -1,4 +1,3 @@
-# Use an official Node runtime as a base image
 FROM node:16.14.0 as build
 WORKDIR /app
 COPY package*.json ./

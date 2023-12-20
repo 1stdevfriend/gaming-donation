@@ -1,6 +1,4 @@
 const BASE_URL = "https://api.xhunter.in";
-// use in dev mode only
-// const BASE_URL = "http://localhost:3006/";
 
 const logotext = "XHUNTER";
 const meta = {

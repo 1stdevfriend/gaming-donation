@@ -8,10 +8,10 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError(error) {
+    // logErrorToMyService(error);
     return { hasError: true };
   }
 
-  // Here we can add logger services
   componentDidCatch(error, errorInfo) {
     // logErrorToMyService(error, errorInfo);
     this.errorMsg = error;
